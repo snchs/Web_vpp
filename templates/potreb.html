@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content=" " name="description">
+    <meta content=" " name="keywords">
+    <title>Личный кабинет</title>
+    <link href="..\static\fonts\stylesheet.css" rel="stylesheet" type="text/css">
+    <!--для графика-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link type="text/css" rel="StyleSheet" href="https://bootstraptema.ru/plugins/2016/shieldui/style.css"/>
+    <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+    <script src="https://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
+
+    <!--    подключение стилей-->
+    <link rel="stylesheet" href="..\static\css\potreb.css">
+</head>
+<body>
+<div id="header">
+    <div class="heading">
+        <div class="headingContent">
+            <a href="google.com" class="heading__logo__ssika">
+                <div class="heading__logo">
+                    <a href="http://www.rosseti.ru/"><img src="..\static\img\logoN.png" alt="" width="70px"
+                                                          class="logo"></a>
+
+                    <div class="logotext">VPP</div>
+                    <div id="minilogo">iramida NRG</div>
+                </div>
+            </a>
+
+            <div class="nav navstyle">
+
+                <ul>
+                    <li>
+                        <a href="#header">Потребитель</a>
+                    </li>
+                </ul>
+            </div>
+
+            <a class="user__name" href="/">{{ current_user.name }}</a>
+            <div class="heading__button">
+                <a href="/logout" class="LOGIN">Выход</a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="title container">
+        <!--<h1>Мощная энергетика - современные технологии, новые возможности!</h1>-->
+        <h1>Добро пожаловать в Личный Кабинет, Потребитель!</h1>
+        <h3>VPPiramida NRG заботится о вас</h3>
+    </div>
+</div>
+
+<div class="Panel-sotrudnika">
+    <div class="container">
+        <h2 class="title-panel-sotrudnika">Панель потребителя</h2>
+        <!--услуги для потребителя, кнопки-->
+        <div class="buttons_with_content">
+            <button class="button_1" id="btn_scheme_vpp">
+                <p class="button_p">Схема платформы</p>
+            </button>
+            <br>
+            <button class="button_1" id="btn_info_consumption">
+                <p class="button_p">Потребление</p>
+            </button>
+            <br>
+            <button class="button_1" id="btn_info_generation">
+                {% if info_generation == -1 %}
+                <p class="button_p">Установить ВИЭ</p>
+                {% else %}
+                <p class="button_p">Генерация</p>
+                {% endif %}
+            </button>
+            <br>
+            <button class="button_1" id="btn_info_storage">
+                {% if info_storage == -1 %}
+                <p class="button_p">Установить накопитель</p>
+                {% else %}
+                <p class="button_p">Баланс накопителя</p>
+                {% endif %}
+            </button>
+            <br>
+            <button class="button_1" id="btn_info_wallet">
+                {% if info_storage == -1 %}
+                <p class="button_p">Оптимизировать прибыль</p>
+                {% else %}
+                <p class="button_p">Кошелек</p>
+                {% endif %}
+            </button>
+            <br>
+            <button class="button_1" id="btn_electricity_prices">
+                <p class="button_p">График цены электроэнергии на рынке</p>
+            </button>
+            <!-------------------->
+            <!--схема-->
+            <div class="scheme_vpp">
+                <img src="../static/img/scheme_vpp.png" alt="scheme_vpp" height="350px">
+            </div>
+            <!--потребеление-->
+            <div class="info_consumption">
+                <p>Потребление: {{info_consumption}} кВт*ч</p>
+            </div>
+            <!--генерация-->
+            <div class="info_generation">
+                <form action="" method="post">
+                    {% if info_generation == -1 %}
+                    <input type="submit" name="submit" class="submit_generation"
+                           value="Подключить ВИЭ">
+                    {% else %}
+                    <p>Генерация: {{info_generation}} кВт*ч</p>
+                    {% endif %}
+                </form>
+            </div>
+            <!--накопление-->
+            <div class="info_storage">
+                <form action="" method="post">
+                    {% if info_storage == -1 %}
+                    <input type="submit" name="submit" class="submit_storage"
+                           value="Установить накопитель">
+                    {% else %}
+                    <p>Накопление: {{info_storage}} кВт*ч</p>
+                    {% endif %}
+                </form>
+            </div>
+            <!--прибыль потребителя-->
+            <div class="info_wallet">
+                <form action="" method="post">
+                    {% if info_wallet == -1 %}
+                    <input type="submit" name="submit" class="submit_wallet"
+                           value="Оптимизировать прибыль">
+                    {% else %}
+                    <p>Кошелек: {{info_wallet}} руб</p>
+                    {% endif %}
+                </form>
+            </div>
+            <!--график-->
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="chart"></div>
+                    <script src="../static/js/graph.js"></script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="Partners">
+        <img src="..\static\img\logo__footerN.png" alt="" height="100px">
+    </div>
+    <div class="blocks">
+        <div class="logotext2">VPP<span class="span">iramida NRG</span></div>
+        <p class="OOO">© 2020-2021, АО «Piramida NRG»</p>
+    </div>
+
+    <div class="bottom__group">
+        <div class="group">
+            <img src="https://image.flaticon.com/icons/svg/739/739158.svg" height="30px" alt="" class="footer__img">
+            <p><span>@Aleksandr_Zhd</span> Александр (Верстальщик)</p>
+        </div>
+    </div>
+</footer>
+
+<!--для плавной прокрутки-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="..\static\js\anchor.js"></script>
+<script type="text/javascript" src="..\static\js\anchor.init.js"></script>
+</body>
+</html>

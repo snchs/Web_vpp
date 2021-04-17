@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="..\static\css\forma_reg.css">
+    <link href="..\static\fonts\stylesheet.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<a href="/" class="strelka"><img src="..\static\img\strelkaNazad.png" height="30px" title="Вернуться"></a>
+
+<form action="" method="post" class="form">
+    {{ form.hidden_tag() }}
+    <h1 class="form__title">Регистрация</h1>
+    <div class="form__group">
+        {{ form.email(class="form__input", type="email", placeholder=" ") }}
+        {{ form.email.label(class="form__label")}}
+        {% for error in form.email.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+
+
+    <div class="form__group">
+        {{ form.password(class="form__input", type="password", placeholder=" ") }}
+        {{ form.password.label(class="form__label")}}
+        {% for error in form.password.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="form__group">
+        {{ form.password_again(class="form__input", type="password", placeholder=" ") }}
+        {{ form.password_again.label(class="form__label")}}
+        {% for error in form.password_again.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="form__group">
+        {{ form.name(class="form__input", placeholder=" ") }}
+        {{ form.name.label(class="form__label")}}
+        {% for error in form.name.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="form__group">
+        {{ form.status.label(class="form_label_status")}}
+        {{ form.status(class="form__input", placeholder=" ") }}
+        {% for error in form.status.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+    {{ form.submit(type="submit", class="form__button1") }}
+    <div class="message">{{ message }}</div>
+</form>
+</body>
+</html>
